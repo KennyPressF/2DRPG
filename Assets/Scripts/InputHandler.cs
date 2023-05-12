@@ -20,12 +20,11 @@ public class InputHandler : MonoBehaviour
         partyCtrl = FindAnyObjectByType<PartyController>();
     }
 
-    public void OnClick(InputAction.CallbackContext context)
+    public void LeftClick(InputAction.CallbackContext context)
     {
-        if (!context.started) { return; }
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(pos: (Vector3)Mouse.current.position.ReadValue()));
         if (!rayHit.collider) { return; }
-
+        Debug.Log("werfhjk");
         switch (LayerMask.LayerToName(rayHit.collider.gameObject.layer))
         {
             case "Ground":
@@ -46,5 +45,10 @@ public class InputHandler : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void NextCharacter(InputAction.CallbackContext context)
+    {
+        partyCtrl.CycleNextCharSelect();
     }
 }

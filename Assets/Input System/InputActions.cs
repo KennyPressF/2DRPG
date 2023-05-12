@@ -44,6 +44,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""NextCharacter"",
+                    ""type"": ""Button"",
+                    ""id"": ""332c46ae-6019-4140-8577-86c9d67c93a5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -53,7 +62,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad;Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
                     ""action"": ""LeftClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -75,7 +84,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
                     ""action"": ""PanCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -86,7 +95,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
                     ""action"": ""PanCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -97,7 +106,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
                     ""action"": ""PanCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -108,7 +117,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
                     ""action"": ""PanCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -119,8 +128,19 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad"",
+                    ""groups"": ""Gamepad;Keyboard&Mouse"",
                     ""action"": ""PanCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e12a5cb3-35b6-42e2-96b6-0284c9090d10"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
+                    ""action"": ""NextCharacter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -710,6 +730,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_LeftClick = m_Player.FindAction("LeftClick", throwIfNotFound: true);
         m_Player_PanCamera = m_Player.FindAction("PanCamera", throwIfNotFound: true);
+        m_Player_NextCharacter = m_Player.FindAction("NextCharacter", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -785,12 +806,14 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_LeftClick;
     private readonly InputAction m_Player_PanCamera;
+    private readonly InputAction m_Player_NextCharacter;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
         public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @LeftClick => m_Wrapper.m_Player_LeftClick;
         public InputAction @PanCamera => m_Wrapper.m_Player_PanCamera;
+        public InputAction @NextCharacter => m_Wrapper.m_Player_NextCharacter;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -806,6 +829,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @PanCamera.started += instance.OnPanCamera;
             @PanCamera.performed += instance.OnPanCamera;
             @PanCamera.canceled += instance.OnPanCamera;
+            @NextCharacter.started += instance.OnNextCharacter;
+            @NextCharacter.performed += instance.OnNextCharacter;
+            @NextCharacter.canceled += instance.OnNextCharacter;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -816,6 +842,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @PanCamera.started -= instance.OnPanCamera;
             @PanCamera.performed -= instance.OnPanCamera;
             @PanCamera.canceled -= instance.OnPanCamera;
+            @NextCharacter.started -= instance.OnNextCharacter;
+            @NextCharacter.performed -= instance.OnNextCharacter;
+            @NextCharacter.canceled -= instance.OnNextCharacter;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1000,6 +1029,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     {
         void OnLeftClick(InputAction.CallbackContext context);
         void OnPanCamera(InputAction.CallbackContext context);
+        void OnNextCharacter(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
