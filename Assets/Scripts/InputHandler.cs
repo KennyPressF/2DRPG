@@ -8,16 +8,19 @@ public class InputHandler : MonoBehaviour
     [SerializeField] GameObject currentCharacter;
     private Camera _mainCamera;
 
+    Vector3 mouseClickPos;
+    Vector3 worldPosition;
+
     private void Awake()
     {
         _mainCamera = Camera.main;
     }
 
-    public void OnClick(InputAction.CallbackContext context)
+    public void OnLeftClick(InputAction.CallbackContext context)
     {
         if (!context.started) { return; }
 
-        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(pos: (Vector3)Mouse.current.position.ReadValue()));
+        RaycastHit2D rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(pos: (Vector3)Mouse.current.position.ReadValue()));
         if (!rayHit.collider) { return; }
         
         switch (LayerMask.LayerToName(rayHit.collider.gameObject.layer))
@@ -25,9 +28,12 @@ public class InputHandler : MonoBehaviour
             case "Ground":
                 Debug.Log(("Layer clicked: ") + (LayerMask.LayerToName(rayHit.collider.gameObject.layer)));
 
-                currentCharacter.GetComponent<CharacterController>().MoveToMouseClickPoint(rayHit.point);
+                mouseClickPos = Mouse.current.position.ReadValue();
+                worldPosition = Camera.main.ScreenToWorldPoint(mouseClickPos);
 
+                currentCharacter.GetComponent<CharacterController>().MoveToMouseClickPoint(worldPosition);
                 break;
+
 
             case "Characters":
                 Debug.Log(("Layer clicked: ") + (LayerMask.LayerToName(rayHit.collider.gameObject.layer)));
