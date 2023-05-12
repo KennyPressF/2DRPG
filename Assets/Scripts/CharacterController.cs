@@ -6,21 +6,25 @@ using UnityEngine.UIElements;
 public class CharacterController : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
-
-    Rigidbody2D rb;
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    Vector2 lastClickPos;
+    bool isMoving = false;
 
     public void MoveToMouseClickPoint(Vector3 point)
     {
-        var targetDestination = new Vector3(point.x, point.y);
+        lastClickPos = new Vector2(point.x, point.y);
         
-        while (transform.position != targetDestination)
+        isMoving = true;
+    }
+
+    private void Update()
+    {
+        if (isMoving && (Vector2)transform.position != lastClickPos)
         {
-            transform.Translate(point);
+            transform.position = Vector2.MoveTowards(transform.position, lastClickPos, (moveSpeed * Time.deltaTime));
+        }
+        else
+        {
+            isMoving = false;
         }
     }
 }
