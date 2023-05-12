@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
-    [SerializeField] GameObject currentCharacter;
     private Camera _mainCamera;
 
     PartyController partyCtrl;
@@ -30,7 +29,6 @@ public class InputHandler : MonoBehaviour
             case "Ground":
                 Debug.Log(("Layer clicked: ") + (LayerMask.LayerToName(rayHit.collider.gameObject.layer)));
 
-                //currentCharacter.GetComponent<CharacterController>().MoveToMouseClickPoint(rayHit.point);
                 partyCtrl.SetSelectedCharacterMovePoint(rayHit.point);
 
                 break;
@@ -47,8 +45,20 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    public void NextCharacter(InputAction.CallbackContext context)
+    public void NextCharacterButton(InputAction.CallbackContext context)
     {
-        partyCtrl.CycleNextCharSelect();
+        if (context.started)
+        {
+            partyCtrl.CycleNextCharSelect();
+
+        }
+    }
+
+    public void PreviousCharacterButton(InputAction.CallbackContext content)
+    {
+        if(content.started)
+        {
+            partyCtrl.CyclePrevCharSelect();
+        }
     }
 }

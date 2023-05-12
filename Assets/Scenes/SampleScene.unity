@@ -607,6 +607,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 332c46ae-6019-4140-8577-86c9d67c93a5
     m_ActionName: Player/NextCharacter[/Keyboard/rightBracket]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 882236857}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: PreviousCharacterButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a011fea1-aa0e-4fed-be48-c8339b33f8c4
+    m_ActionName: Player/PrevCharacter[/Keyboard/leftBracket]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

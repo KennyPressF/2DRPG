@@ -23,6 +23,17 @@ public class PartyController : MonoBehaviour
         }
 
         selectedCharacter = characters[selectedCharIndex];
+    }
 
+    public void CyclePrevCharSelect()
+    {
+        selectedCharIndex--;
+
+        if (selectedCharIndex < 0)
+        {
+            selectedCharIndex = characters.Length - 1;
+        }
+
+        selectedCharacter = characters[selectedCharIndex];
     }
 }

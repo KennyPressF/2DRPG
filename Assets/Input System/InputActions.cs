@@ -53,6 +53,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PrevCharacter"",
+                    ""type"": ""Button"",
+                    ""id"": ""a011fea1-aa0e-4fed-be48-c8339b33f8c4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -141,6 +150,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse;Gamepad"",
                     ""action"": ""NextCharacter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e1edf85-5d9f-4114-a966-3bd40b400d2e"",
+                    ""path"": ""<Keyboard>/leftBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
+                    ""action"": ""PrevCharacter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -731,6 +751,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_LeftClick = m_Player.FindAction("LeftClick", throwIfNotFound: true);
         m_Player_PanCamera = m_Player.FindAction("PanCamera", throwIfNotFound: true);
         m_Player_NextCharacter = m_Player.FindAction("NextCharacter", throwIfNotFound: true);
+        m_Player_PrevCharacter = m_Player.FindAction("PrevCharacter", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -807,6 +828,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LeftClick;
     private readonly InputAction m_Player_PanCamera;
     private readonly InputAction m_Player_NextCharacter;
+    private readonly InputAction m_Player_PrevCharacter;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -814,6 +836,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @LeftClick => m_Wrapper.m_Player_LeftClick;
         public InputAction @PanCamera => m_Wrapper.m_Player_PanCamera;
         public InputAction @NextCharacter => m_Wrapper.m_Player_NextCharacter;
+        public InputAction @PrevCharacter => m_Wrapper.m_Player_PrevCharacter;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -832,6 +855,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @NextCharacter.started += instance.OnNextCharacter;
             @NextCharacter.performed += instance.OnNextCharacter;
             @NextCharacter.canceled += instance.OnNextCharacter;
+            @PrevCharacter.started += instance.OnPrevCharacter;
+            @PrevCharacter.performed += instance.OnPrevCharacter;
+            @PrevCharacter.canceled += instance.OnPrevCharacter;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -845,6 +871,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @NextCharacter.started -= instance.OnNextCharacter;
             @NextCharacter.performed -= instance.OnNextCharacter;
             @NextCharacter.canceled -= instance.OnNextCharacter;
+            @PrevCharacter.started -= instance.OnPrevCharacter;
+            @PrevCharacter.performed -= instance.OnPrevCharacter;
+            @PrevCharacter.canceled -= instance.OnPrevCharacter;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1030,6 +1059,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnLeftClick(InputAction.CallbackContext context);
         void OnPanCamera(InputAction.CallbackContext context);
         void OnNextCharacter(InputAction.CallbackContext context);
+        void OnPrevCharacter(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
