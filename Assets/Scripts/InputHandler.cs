@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
-    private Camera _mainCamera;
+    private Camera mainCamera;
 
     PartyController partyCtrl;
 
     private void Awake()
     {
-        _mainCamera = Camera.main;
+        mainCamera = Camera.main;
     }
 
     private void Start()
@@ -21,9 +22,9 @@ public class InputHandler : MonoBehaviour
 
     public void LeftClick(InputAction.CallbackContext context)
     {
-        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(pos: (Vector3)Mouse.current.position.ReadValue()));
+        var rayHit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(pos: (Vector3)Mouse.current.position.ReadValue()));
         if (!rayHit.collider) { return; }
-        Debug.Log("werfhjk");
+
         switch (LayerMask.LayerToName(rayHit.collider.gameObject.layer))
         {
             case "Ground":
