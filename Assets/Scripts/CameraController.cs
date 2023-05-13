@@ -8,18 +8,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] float camPanSpeed;
     [SerializeField] float camZoomSpeed;
 
-    Vector2 targetPos;
-    bool isMoving = false;
-
     private void Start()
     {
         mainCam = this.gameObject.GetComponent<Camera>();
-    }
-
-    public void PanCamera(Vector2 inputVector)
-    {
-        targetPos = (Vector2)transform.position + inputVector;
-        isMoving = true;
     }
 
     void Update()

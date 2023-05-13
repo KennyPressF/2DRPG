@@ -10,7 +10,7 @@ public class PartyController : MonoBehaviour
 
     public void SetSelectedCharacterMovePoint(Vector2 clickPos)
     {
-        selectedCharacter.GetComponent<CharacterController>().MoveToMouseClickPoint(clickPos);
+        selectedCharacter.GetComponent<CharacterPathfinder>().targetPos = clickPos;
     }
 
     public void CycleNextCharSelect()
