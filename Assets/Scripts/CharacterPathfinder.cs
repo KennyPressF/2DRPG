@@ -10,7 +10,7 @@ public class CharacterPathfinder : MonoBehaviour
 
     Path path;
     int currentWaypoint = 0;
-    bool reachedEndOfPath = false;
+    [SerializeField] bool isMoving = false;
 
     Seeker seeker;
     CharacterController charCtrl;
@@ -20,21 +20,22 @@ public class CharacterPathfinder : MonoBehaviour
         seeker = GetComponent<Seeker>();
         charCtrl = GetComponent<CharacterController>();
 
-        InvokeRepeating("UpdatePath", 0f, 0.5f);
+        targetPos = transform.position;
     }
-
-    private void UpdatePath()
+    public void SetNewPath(Vector2 clickPos)
     {
-        if(seeker.IsDone())
+        targetPos = clickPos;
+        isMoving = true;
+
+        if (seeker.IsDone() && isMoving)
         {
-            seeker.StartPath(transform.position, targetPos, OnPathComplete);
-            reachedEndOfPath = true;
+            seeker.StartPath(transform.position, targetPos, OnGeneratePathComplete);
         }
     }
 
-    private void OnPathComplete(Path newPath)
+    private void OnGeneratePathComplete(Path newPath)
     {
-        if(!newPath.error)
+        if (!newPath.error)
         {
             Debug.Log("Generating Path");
             path = newPath;
@@ -44,24 +45,30 @@ public class CharacterPathfinder : MonoBehaviour
 
     private void Update()
     {
-        if(path == null)
+        if (path == null)
         { return; }
 
-        if(currentWaypoint >= path.vectorPath.Count)
+
+        if (currentWaypoint >= path.vectorPath.Count)
         {
-            reachedEndOfPath = true;
+            isMoving = false;
             return;
         }
         else
         {
-            reachedEndOfPath = false;
+            isMoving = true;
         }
 
-        Vector2 currentWaypointPos = new Vector2(path.vectorPath[currentWaypoint].x, path.vectorPath[currentWaypoint].y);
-        charCtrl.MoveToWaypoint(currentWaypointPos);
+
+        if(isMoving)
+        {
+            Vector2 currentWaypointPos = new Vector2(path.vectorPath[currentWaypoint].x, path.vectorPath[currentWaypoint].y);
+            charCtrl.MoveToWaypoint(currentWaypointPos);
+        }
+        
 
         float distance = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
-        if(distance < nextWaypointDistance)
+        if (distance < nextWaypointDistance)
         {
             currentWaypoint++;
         }

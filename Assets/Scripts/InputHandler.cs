@@ -22,6 +22,8 @@ public class InputHandler : MonoBehaviour
 
     public void LeftClick(InputAction.CallbackContext context)
     {
+        if(!context.started) { return; }
+
         var rayHit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(pos: (Vector3)Mouse.current.position.ReadValue()));
         if (!rayHit.collider) { return; }
 
@@ -38,7 +40,8 @@ public class InputHandler : MonoBehaviour
                 Debug.Log(("Layer clicked: ") + (LayerMask.LayerToName(rayHit.collider.gameObject.layer)));
                 break;
 
-            case "":
+            case "Obstacle":
+                Debug.Log(("Layer clicked: ") + (LayerMask.LayerToName(rayHit.collider.gameObject.layer)));
                 break;
 
             default:
