@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CharacterController : MonoBehaviour
+public class MoveToVector2 : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
     Vector2 targetPos;
