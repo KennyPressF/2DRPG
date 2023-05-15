@@ -13,12 +13,12 @@ public class CharacterPathfinder : MonoBehaviour
     [SerializeField] bool isMoving = false;
 
     Seeker seeker;
-    MoveToVector2 charCtrl;
+    CharacterMotor charCtrl;
 
     private void Start()
     {
         seeker = GetComponent<Seeker>();
-        charCtrl = GetComponent<MoveToVector2>();
+        charCtrl = GetComponent<CharacterMotor>();
 
         targetPos = transform.position;
     }

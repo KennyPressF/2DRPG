@@ -249,12 +249,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 375232219}
-  - component: {fileID: 375232218}
   - component: {fileID: 375232216}
   - component: {fileID: 375232220}
   - component: {fileID: 375232221}
   - component: {fileID: 375232222}
   - component: {fileID: 375232223}
+  - component: {fileID: 375232218}
   m_Layer: 6
   m_Name: Character (1)
   m_TagString: Player
@@ -362,8 +362,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2e9ce4d11bc924980780d387dd15c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCurrentChosenChar: 0
   characterName: 
+  isCurrentChosenChar: 0
+  statsSO: {fileID: 11400000, guid: a156872414e83dc4582414cdd2c5542c, type: 2}
+  statsList: 
 --- !u!50 &375232223
 Rigidbody2D:
   serializedVersion: 4
@@ -588,12 +590,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 668508557}
-  - component: {fileID: 668508556}
   - component: {fileID: 668508554}
   - component: {fileID: 668508559}
   - component: {fileID: 668508558}
   - component: {fileID: 668508560}
   - component: {fileID: 668508561}
+  - component: {fileID: 668508556}
   m_Layer: 6
   m_Name: Character (3)
   m_TagString: Player
@@ -701,8 +703,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2e9ce4d11bc924980780d387dd15c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCurrentChosenChar: 0
   characterName: 
+  isCurrentChosenChar: 0
+  statsSO: {fileID: 11400000, guid: a156872414e83dc4582414cdd2c5542c, type: 2}
+  statsList: 
 --- !u!50 &668508561
 Rigidbody2D:
   serializedVersion: 4
@@ -733,12 +737,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 783935496}
-  - component: {fileID: 783935495}
   - component: {fileID: 783935493}
   - component: {fileID: 783935498}
   - component: {fileID: 783935497}
   - component: {fileID: 783935499}
   - component: {fileID: 783935500}
+  - component: {fileID: 783935495}
   m_Layer: 6
   m_Name: Character (2)
   m_TagString: Player
@@ -846,8 +850,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2e9ce4d11bc924980780d387dd15c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCurrentChosenChar: 0
   characterName: 
+  isCurrentChosenChar: 0
+  statsSO: {fileID: 11400000, guid: a156872414e83dc4582414cdd2c5542c, type: 2}
+  statsList: 
 --- !u!50 &783935500
 Rigidbody2D:
   serializedVersion: 4
@@ -1192,12 +1198,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1198106203}
-  - component: {fileID: 1198106202}
   - component: {fileID: 1198106205}
   - component: {fileID: 1198106207}
   - component: {fileID: 1198106208}
   - component: {fileID: 1198106209}
   - component: {fileID: 1198106210}
+  - component: {fileID: 1198106202}
   m_Layer: 6
   m_Name: Character (0)
   m_TagString: Player
@@ -1305,8 +1311,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2e9ce4d11bc924980780d387dd15c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCurrentChosenChar: 0
   characterName: 
+  isCurrentChosenChar: 0
+  statsSO: {fileID: 11400000, guid: a156872414e83dc4582414cdd2c5542c, type: 2}
+  statsList: 
 --- !u!50 &1198106210
 Rigidbody2D:
   serializedVersion: 4

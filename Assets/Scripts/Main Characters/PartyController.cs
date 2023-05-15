@@ -30,6 +30,8 @@ public class PartyController : MonoBehaviour
 
     public void CycleNextCharSelect()
     {
+        selectedCharacter.GetComponent<CharacterSheet>().isCurrentChosenChar = false;
+
         selectedCharIndex++;
 
         if (selectedCharIndex >= characters.Length)
@@ -38,10 +40,13 @@ public class PartyController : MonoBehaviour
         }
 
         selectedCharacter = characters[selectedCharIndex];
+        selectedCharacter.GetComponent<CharacterSheet>().isCurrentChosenChar = true;
     }
 
     public void CyclePrevCharSelect()
     {
+        selectedCharacter.GetComponent<CharacterSheet>().isCurrentChosenChar = false;
+
         selectedCharIndex--;
 
         if (selectedCharIndex < 0)
@@ -50,5 +55,7 @@ public class PartyController : MonoBehaviour
         }
 
         selectedCharacter = characters[selectedCharIndex];
+
+        selectedCharacter.GetComponent<CharacterSheet>().isCurrentChosenChar = true;
     }
 }
